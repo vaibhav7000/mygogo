@@ -1,0 +1,15 @@
+#!/Users/vaibhavchawla/.nvm/versions/node/v22.22.2/bin/node
+import { Command } from "commander";
+import userInfoCommand from "./subcommands/userinfoCommand.js";
+
+const program = new Command("mygogo");
+
+program
+    .version('1.0.0')
+    .description('Google APIS CLI Wrapper mygogo')
+
+program
+    .addCommand(userInfoCommand);
+
+
+program.parse(process.argv);
