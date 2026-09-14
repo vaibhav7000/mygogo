@@ -1,7 +1,7 @@
 #!/Users/vaibhavchawla/.nvm/versions/node/v22.22.2/bin/node
 import { Command } from "commander";
 import userInfoCommand from "./subcommands/userinfoCommand.js";
-
+import authCommand from "./subcommands/authCommand.js"
 const program = new Command("mygogo");
 
 program
@@ -11,5 +11,7 @@ program
 program
     .addCommand(userInfoCommand);
 
+program
+    .addCommand(authCommand);
 
 program.parse(process.argv);

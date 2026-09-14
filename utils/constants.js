@@ -6,7 +6,7 @@ export const CLIENT_ID = process.env.CLIENT_ID; // have to replace
 export const CLIENT_SECRET = process.env.CLIENT_SECRET; // have to replace this
 export const REDIRECT_URI = "http://localhost:8080/callback";
 export const PORT = 8080;
-export const SCOPES = ['https://www.googleapis.com/auth/userinfo.profile'];
+export const SCOPES = ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/calendar'];
 
 
 // keyring constants

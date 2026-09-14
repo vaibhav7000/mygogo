@@ -1,9 +1,17 @@
 import { google } from "googleapis";
 import { getAuthCredentials, setAuthCredentials } from "../../utils/authstore.js";
+import { CLIENT_ID, CLIENT_SECRET } from "../../utils/constants.js";
 
-const oAuth2Client = new google.auth.OAuth2();
+
 
 export async function getUserInfo() {
+
+    // this is interface that is necessary for the interactions with googleapis and also for the access_token to get be refreshed
+    const oAuth2Client = new google.auth.OAuth2({
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+    });
+
     try {
         const credentials = getAuthCredentials();
 
@@ -11,6 +19,8 @@ export async function getUserInfo() {
             console.log('You does not provide mygogo access to your credentials');
             return;
         }
+
+        oAuth2Client.setCredentials(credentials);
 
         oAuth2Client.on('tokens', (newToken) => {
             const newCredentials = {
@@ -22,10 +32,9 @@ export async function getUserInfo() {
             setAuthCredentials(newCredentials);
         })
 
-        oAuth2Client.setCredentials(credentials);
 
         // const { token, res } = await oAuth2Client.getAccessToken(); -> no need to send request for getting the valid access_token userClient will handle this, but have to update the stored credentials will happen using .on("token");
-
+    
         const userClient = google.oauth2({
             version: 'v2',
             auth: oAuth2Client
@@ -35,7 +44,7 @@ export async function getUserInfo() {
 
         return data;
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
 

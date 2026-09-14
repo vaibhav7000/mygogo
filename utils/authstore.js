@@ -33,3 +33,10 @@ export function setAuthCredentials(data) {
         throw "not able to set the data in the OS level utility"
     }
 }
+
+export function deleteAuthCredentials() {
+    const response = AUTHENTRY.deleteCredential();
+    credentials = undefined;
+    shouldRefreshCredentials = true;
+    return response;
+}
